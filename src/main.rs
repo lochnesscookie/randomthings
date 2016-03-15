@@ -6,7 +6,13 @@ fn main(){
         if max > p {
             break;
         } else {
-            for i in 
+            max_primes = max_quadratic_primes(*p, &primes);
+            if max < max_primes {
+                max = max_primes;
+            }
+        }
+    }
+    println!("{}",max);
 }
 
 fn make_primes(upper: usize) -> Vec<usize>{
@@ -39,8 +45,15 @@ fn is_prime(num: usize, primelist: &Vec<usize>) -> bool {
 fn max_quadratic_primes(num: usize, primelist: &Vec<usize>) -> usize {
     let mut max = 0;
     for a in 0..2 {
-        let signa = i * 2 - 1;
-        for b in 0..2 {
-            let signb = i * 2 - 1;
-            for j in 0..1000 {
-                if is_prime(j * j + j * i *
+        let sign = i * 2 - 1;
+        for coef in 0..1000 {
+            for i in 0.. {
+                let result = i * i + sign * (coef * i) as isize + num as isize;
+                if (result <= 1 || !is_prime(result, primelist)) && max < i {
+                    max = i;
+                }
+            }
+        }
+    }
+    max
+}
